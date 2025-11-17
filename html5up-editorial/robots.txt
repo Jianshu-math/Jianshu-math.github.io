@@ -1,0 +1,8 @@
+# 允许所有搜索引擎 (User-agent: *) 
+# 访问网站上的所有内容 (Allow: /)
+User-agent: *
+Allow: /
+
+# 告诉搜索引擎去哪里找你的网站地图
+# (请务必将 https://www.your-domain.com 替换为您的真实网址)
+Sitemap: https://jianshu-math.github.io/sitemap.xml
