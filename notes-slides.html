@@ -1,0 +1,146 @@
+<!DOCTYPE HTML>
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+
+	** 这是一个包含LaTeX支持的“数学笔记”页面模板 **
+-->
+<html>
+	<head>
+		<title>Notes and Slides - Jianshu Jiang's Homepage</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+
+		<!-- 
+		** KaTeX (LaTeX 渲染) - 开始 **
+		这是支持LaTeX所需添加的代码 
+		-->
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.css" xintegrity="sha384-KiWOvVjnN8qwZuNgoGvBvRBOOhczpiLMi0jZYUhQbnJ0M5bF+BDonG1pGyxKmkY/ " crossorigin="anonymous">
+		<script src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.js" xintegrity="sha384-hIoBPJpTUsAANxIYe/D8oGksJRTbJJaVptpdFqcOzeA/wVv/IuFv5peA+8rTfmT/ " crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/contrib/auto-render.min.js" xintegrity="sha384-L8iWnBFFGqCYvI/b2F6nBvR/q2yqfQvYKC/YtL1/f/fM+zJdM3iQ/iHn8C6M/GxF " crossorigin="anonymous"></script>
+		<!-- ** KaTeX (LaTeX 渲染) - 结束 ** -->
+
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+
+							<!-- Header -->
+							<header id="header">
+								<a href="index.html" class="logo"><strong>Jianshu Jiang (蒋建树)'s</strong> Homepage</a>
+							</header>
+
+							<!-- 笔记内容区 -->
+							<section>
+								<header class="major">
+									<h2>Notes and Slides</h2>
+								</header>
+								<div class="content">
+									<p>Here is a collection of my study notes, talk notes, and presentation slides.</p>
+
+									<h3>Ergodic Theory</h3>
+									<ul>
+										<li>
+											<a href="notes_slides/Geometric_MET.pdf">Geometric form of Oseledets’ Multiplicative Ergodic theorem</a> - A talk notes on Oseledets’ Multiplicative Ergodic Theorem (MET), trying to discribe a geometric framework of this theorem pioneered by Kaimanovich.
+										</li>
+										<li>
+											<a href="notes_slides/roth_ergodic.pdf">Notes on ergodic proof of Roth theorem (in Chinese)</a> - A reading notes on Furstenberg's corresponding principle and ergodic proof of Roth theorem on arithmetic progress of length 3.
+										</li>
+									</ul>
+									
+									
+								</div>
+							</section>
+
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+					<div id="sidebar">
+						<div class="inner">
+
+							<!-- Search -->
+								<section id="search" class="alt">
+									<form method="post" action="#">
+										<input type="text" name="query" id="query" placeholder="Search" />
+									</form>
+								</section>
+
+							<!-- Menu -->
+								<nav id="menu">
+									<header class="major">
+										<h2>Menu</h2>
+									</header>
+									<ul>
+										<li><a href="index.html">Homepage</a></li>
+										<li><a href="#">Research</a></li>
+										<li><a href="#">Teaching</a></li>
+										<li>
+											<span class="opener">Writing</span>
+											<ul>
+												<!-- 更新了这里的链接 -->
+												<li><a href="notes-slides.html">Notes and Slides</a></li>
+												<li><a href="blog-archive.html">Blog</a></li>
+											</ul>
+										</li>
+									</ul>
+								</nav>
+
+							<!-- Section -->
+								
+							<!-- Section -->
+								<section>
+									<header class="major">
+										<h2>Get in touch</h2>
+									</header>
+									<ul class="contact">
+										<li class="icon solid fa-envelope"><a href="#">jianshu.jiang@uzh.ch</a></li>
+										<li class="icon solid fa-home">Institut für Mathematik, Wintherturerstrasse 190<br />
+										8057 Zurich, Switzerland</li>
+									</ul>
+								</section>
+
+							<!-- Footer -->
+								<footer id="footer">
+									<p class="copyright">&copy; Untitled. All rights reserved. Demo Images: <a href="https://unsplash.com">Unsplash</a>. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
+								</footer>
+
+						</div>
+					</div>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+		<!-- 
+		** KaTeX (LaTeX 渲染) - 自动渲染脚本 **
+		这是激活KaTeX所需的脚本
+		-->
+		<script>
+			document.addEventListener("DOMContentLoaded", function() {
+				renderMathInElement(document.body, {
+					// KaTeX 的配置选项
+					delimiters: [
+						{left: '$$', right: '$$', display: true},  // 用于块级公式
+						{left: '$', right: '$', display: false},   // 用于行内公式
+						{left: '\\[', right: '\\]', display: true},
+						{left: '\\(', right: '\\)', display: false}
+					]
+				});
+			});
+		</script>
+
+	</body>
+</html>
