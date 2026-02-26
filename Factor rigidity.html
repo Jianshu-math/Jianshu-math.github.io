@@ -1,0 +1,401 @@
+<!DOCTYPE HTML>
+<!--
+	基于 Editorial by HTML5 UP 修改
+	模仿 Read the Docs / Sphinx 学术文档风格
+-->
+<html>
+	<head>
+		<title>Lecture Notes - Jianshu Jiang</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+
+		<!-- 1. KaTeX (LaTeX 渲染) -->
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.css" xintegrity="sha384-KiWOvVjnN8qwZuNgoGvBvRBOOhczpiLMi0jZYUhQbnJ0M5bF+BDonG1pGyxKmkY/ " crossorigin="anonymous">
+		<script src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.js" xintegrity="sha384-hIoBPJpTUsAANxIYe/D8oGksJRTbJJaVptpdFqcOzeA/wVv/IuFv5peA+8rTfmT/ " crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/contrib/auto-render.min.js" xintegrity="sha384-L8iWnBFFGqCYvI/b2F6nBvR/q2yqfQvYKC/YtL1/f/fM+zJdM3iQ/iHn8C6M/GxF " crossorigin="anonymous"></script>
+
+		<!-- 2. Marked.js (Markdown 解析器) -->
+		<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+		<!-- 3. 自定义学术样式 (覆盖默认样式) -->
+		<style>
+			/* --- 整体布局调整 --- */
+			body, #wrapper {
+				background-color: #ffffff; /* 纯白背景 */
+			}
+			#main .inner {
+				padding: 4em 4em 2em 4em; /* 增加内边距，让文字更聚焦 */
+				max-width: 1000px; /* 限制最大宽度，防止单行文字过长 */
+				margin: 0 auto;
+			}
+
+			/* --- 字体排版 (模仿 Read the Docs) --- */
+			body, p, li {
+				font-family: "Georgia", "Times New Roman", Times, serif; /* 正文使用衬线字体 */
+				color: #333;
+				font-size: 1.15rem;
+				line-height: 1.8;
+			}
+			h1, h2, h3, h4, strong {
+				font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif; /* 标题保持无衬线 */
+				color: #2c3e50;
+			}
+			h1 { font-size: 2.5em; border-bottom: 1px solid #eee; padding-bottom: 0.5em; margin-bottom: 1em; }
+			h2 { font-size: 1.8em; margin-top: 1.5em; border-bottom: 1px solid #f0f0f0; padding-bottom: 0.3em; }
+			h3 { font-size: 1.4em; margin-top: 1.2em; color: #e74c3c; /*以此致敬原网站的红色小标题*/ }
+
+			/* --- 侧边栏调整 --- */
+			#sidebar {
+				background: #fcfcfc;
+				border-right: 1px solid #eee;
+			}
+			#sidebar .inner {
+				padding: 2em;
+			}
+			
+			/* 目录样式 */
+			.toc-container {
+				margin-bottom: 3em;
+			}
+			.toc-header {
+				font-family: "Roboto", sans-serif;
+				font-size: 0.9em;
+				text-transform: uppercase;
+				letter-spacing: 1px;
+				color: #999;
+				margin-bottom: 1em;
+				font-weight: bold;
+			}
+			/* 自动生成的目录列表 */
+			#auto-toc {
+				list-style: none;
+				padding: 0;
+				margin: 0;
+			}
+			#auto-toc li {
+				padding: 0;
+				margin: 0;
+				border: none;
+			}
+			#auto-toc a {
+				display: block;
+				padding: 0.3em 0;
+				color: #555;
+				text-decoration: none;
+				font-size: 0.95em;
+				font-family: "Roboto", sans-serif;
+				border-bottom: none;
+				transition: color 0.2s;
+			}
+			#auto-toc a:hover {
+				color: #2c3e50;
+				font-weight: bold;
+			}
+			#auto-toc .toc-sub {
+				padding-left: 1.5em; /* 缩进子标题 */
+				font-size: 0.9em;
+			}
+
+			/* 定理环境 */
+			blockquote {
+				border-left: 4px solid #2980b9;
+				background: #f4f8fb;
+				padding: 1em 1.5em;
+				margin: 1.5em 0;
+				font-style: normal;
+				color: #444;
+			}
+			
+			/* 代码块 */
+			pre {
+				background: #f5f5f5;
+				border: 1px solid #eee;
+				border-radius: 4px;
+				padding: 1em;
+			}
+		</style>
+	</head>
+	<body class="is-preload">
+
+		<div id="wrapper">
+
+			<!-- Main Content -->
+			<div id="main">
+				<div class="inner">
+					
+					<!-- 
+						Markdown 内容区域 
+						注意：不需要写 Header, Banner 等，直接开始写正文
+					-->
+					<div id="markdown-target"></div>
+
+				</div>
+			</div>
+
+			<!-- Sidebar -->
+			<div id="sidebar">
+				<div class="inner">
+
+					<!-- 1. 自动生成的目录 (这是核心功能) -->
+					<div class="toc-container">
+						<div class="toc-header">Contents</div>
+						<ul id="auto-toc">
+							<!-- JavaScript 会自动填充这里 -->
+						</ul>
+					</div>
+
+					<!-- 2. 全局导航 (保留，但放在目录下面) -->
+					<nav id="menu">
+						<div class="toc-header">Menu</div>
+						<ul>
+							<li><a href="index.html">Homepage</a></li>
+							<li><a href="Research.html">Research</a></li>
+							<li><a href="notes-and-slides.html">Notes & Slides</a></li>
+							<li><a href="blog-archive.html">Blog</a></li>
+						</ul>
+					</nav>
+
+					<!-- Footer -->
+					<footer id="footer">
+						<p class="copyright" style="font-size: 0.8em; color: #aaa;">&copy; Jianshu Jiang.</p>
+					</footer>
+
+				</div>
+			</div>
+
+		</div>
+
+		<!-- Scripts -->
+		<script src="assets/js/jquery.min.js"></script>
+		<script src="assets/js/browser.min.js"></script>
+		<script src="assets/js/breakpoints.min.js"></script>
+		<script src="assets/js/util.js"></script>
+		<script src="assets/js/main.js"></script>
+
+<!-- 
+======================================================
+Markdown 写作区
+======================================================
+-->
+<script type="text/markdown" id="markdown-source">
+# Rigidity of factor maps of some unipotent flows
+
+
+## 1. Introduction
+In this post, I want to discuss the classification problem for a specific class of dynamical systems: **unipotent flows on homogeneous spaces**. By proving a special case of **Ratner’s measure rigidity theorem**, we will see that factor maps between unipotent flows are essentially "algebraic" in nature. I learned this material last semester in the course *Homogeneous Dynamics and Applications* taught by Prof. Manfred Einsiedler at ETH Zurich. The proof is, in my opinion, quite elegant and interesting. Basically everything here is taken (almost verbatim) from the forthcoming book *[Homogeneous Dynamics and Applications](https://tbward0.wixsite.com/books/homogeneous)* of Manfred Einsiedler and Thomas Ward , all mistakes here are of course introduced by the author and the associated blame lies solely with him.
+
+Our primary objects of study are **factors** of measure-preserving systems. We say that a measure-preserving system $(X_1, \mathcal{B}_1, \mu_1, u_t^{(1)})$ is a **factor** of another system $(X_2, \mathcal{B}_2, \mu_2, u_t^{(2)})$ if there exists a measurable map $\phi: X_2 \to X_1$ such that:
+
+1. $\phi_* \mu_2 = \mu_1$ (the map is measure-preserving).
+2. For $\mu_2$-a.e. $x \in X_2$, $u_t^{(1)}(\phi(x)) = \phi(u_t^{(2)}(x))$ for all $t \in \mathbb{R}$.
+
+Essentially, $\phi$ maps orbits to orbits, and such a measurable map is called a **factor map**. If a factor map is invertible and its inverse also satisfies these same properties, we say that the two systems are **isomorphic**.
+
+
+Next, let us focus our attention on the specific class of dynamical systems that this post will address. Let $G = \text{SL}_2(\mathbb{R})$ or $\text{SL}_3(\mathbb{R})$, and let $\Gamma_i < G$ for $i=1, 2$ be lattice subgroups. Let $H = \{u_t : t \in \mathbb{R}\}$ be a one-parameter subgroup. We consider the measure-preserving systems $\mathbb{X}_i = (X_i = G/\Gamma_i, m_{X_i}, u_t)$, where $m_{X_i}$ is the normalized Haar measure (the unique $G$-invariant probability measure).
+
+In general, factor maps or isomorphisms are often merely measurable; they may possess "fractal" properties and do not necessarily preserve the topological dimension. In other words, from a purely measure-theoretic perspective, we cannot expect these maps to have any nice geometric regularity.
+
+However, when $H = U$ is a **one-parameter unipotent subgroup**—that is, there exists a nilpotent element $v$ in the Lie algebra $\mathfrak{g}$ such that $u_t = \exp(tv)$—then $\text{Ad}_{u_t} = \exp(t \, \text{ad}_v)$ is a polynomial in $t$. As we will see, this leads to a dramatic change in the situation: in this case, the factor map is essentially algebraic, and therefore, it is specifically a smooth map. That is to say, as long as the equivariant condition of the factor map is satisfied along just one direction in $G$, this constraint "forces" the map to exhibit excellent regularity in all directions of $G$.
+
+> **Theorem 1.** Let $X_1, X_2$ be as defined above, and let $U = \{u_t = \exp(tu) : t \in \mathbb{R}\}$ be a one-parameter unipotent subgroup. If $\phi: X_1 \to X_2$ is a factor map, then there exists an automorphism $\psi$ of $G$ satisfying $\psi|_U = \text{id}$ and an element $h \in G$ such that:
+> $$ \phi(g\Gamma_1) = \psi(g)h\Gamma_2 \quad \text{for } m_{X_1}\text{-a.e. } g\Gamma_1 \in X_1. $$
+
+**Remark.** Recall that for a connected, simple real Lie group $G$ with finite center, $$\text{Aut}(G) \cong \text{Inn}(G) \rtimes \text{Out}(G).$$ In our case, elements in the inner automorphism group are all conjugations; i.e., if $\psi \in \text{Inn}(\text{SL}_3(\mathbb{R}))$, there exists $\tilde{g} \in \text{SL}_3(\mathbb{R})$ such that $\psi(l) = \tilde{g}^{-1}l\tilde{g}$. 
+The only non-trivial element in the outer automorphism group is $\theta: g \to (g^{-1})^T$. It is easy to verify that $\theta $ is not the identity on $U$. Therefore, the automorphism obtained in Theorem 1 must be an inner automorphism—specifically, a conjugation by some element. This leads to the following corollary.
+
+> **Corollary 2.** Let $X_1, X_2$ be as before, and let $U = \{u_t = \exp(tu) : t \in \mathbb{R}\}$ be a one-parameter unipotent subgroup. If $X_2$ is a factor of $X_1$, then there exists $g \in G$ such that $g^{-1}\Gamma_1 g \subseteq \Gamma_2$.
+
+**Proof.** By the definition of factors and Theorem 1, there exists a factor map $\phi: X_1 \to X_2$, an automorphism $\psi$ of $G$ satisfying $\psi|_U = \text{id}$, and an element $h \in G$ such that $\phi(g\Gamma_1) = \psi(g)h\Gamma_2$ for $m_{X_1}$-a.e. $g\Gamma_1 \in X_1$.
+
+Note that for any $\gamma \in \Gamma_1$, we have:
+$$ \phi(g\Gamma_1) = \phi(g\gamma\Gamma_1) = \psi(g\gamma)h\Gamma_2 = \psi(g)\psi(\gamma)h\Gamma_2 = \psi(g)h(h^{-1}\psi(\gamma)h)\Gamma_2 $$
+For this to coincide with $\psi(g)h\Gamma_2$ for almost all $g$, we must have $h^{-1}\psi(\gamma)h \in \Gamma_2$ for all $\gamma \in \Gamma_1$. 
+As discussed in the Remark, $\psi$ is a conjugation by some element, say $\psi(l) = \tilde{g}^{-1}l\tilde{g}$ for some $\tilde{g} \in G$. Setting $g = \tilde{g}h$, we obtain $g^{-1}\gamma g \in \Gamma_2$. 
+Since $\gamma$ was arbitrary, it follows that $g^{-1}\Gamma_1 g \subseteq \Gamma_2$. 
+
+This phenomenon is quite striking and serves as a classic example of what is known as **"rigidity."** In the case of $\text{SL}_2(\mathbb{R})$, this result originated from the pioneering work of **[Marina Ratner](https://www.jstor.org/stable/2007014)**; the more general case was established by **[Dave Witte Morris](https://link.springer.com/article/10.1007/BF01388769)**. 
+In this post, we will primarily focus on the dynamical systems aspect of the proof for the $G = \text{SL}_3(\mathbb{R})$ case.
+
+## 2. Basic Observations
+
+To investigate factor maps, a common approach in ergodic theory is to simultaneously consider the behavior of a point $x$ and its image $\phi(x)$ under the flow $u_t$. In other words, we examine the pair $(x, \phi(x)) \in \text{Graph}(\phi) \subseteq X_1 \times X_2$ under the diagonal action $(u_t, u_t) \in \Delta(U)=\{(u,u):\ u\in U\}$. We hope to extract information about the structure of $\text{Graph}(\phi)$ from its dynamical behavior.
+
+Consider the system $\mathbb{X} = (X_1 \times X_2, \mu, (u_t, u_t))$, where the measure $\mu$ is defined by $\mu = (\text{id}, \phi)_* m_{X_1}$. Note that $\mu$ satisfies $\mu(\text{Graph}(\phi)) = 1$ and $(\pi_i)_* \mu = m_{X_i}$. Such a measure is called a **graph joining** of $\mathbb{X}_1$ and $\mathbb{X}_2$.
+
+The **Mautner phenomenon** implies that each $X_i$ is ergodic. Since $\phi$ is a factor map, it follows from the definition of $\mu$ that the product system $X$ is also ergodic. Thus, $\mu$ is a $\Delta(U)$-invariant ergodic probability measure on $X = G/\Gamma_1 \times G/\Gamma_2 \cong (G \times G) / (\Gamma_1 \times \Gamma_2)$.
+
+
+Our strategy to prove that $\phi$ is almost everywhere "algebraic" is to show that the measure $\mu$ itself is algebraic. Specifically, we want to prove that $\mu$ is the **volume measure** on an orbit $L \cdot (g_1\Gamma_1, g_2\Gamma_2)$ of a connected closed subgroup 
+$$L = \text{Stab}(\mu)^\circ := \{g \in G \times G : g_* \mu = \mu\} \supseteq \Delta(U).$$
+ Furthermore, we aim to show that $L$ is actually the graph of some automorphism $\varphi$ of $G$.
+
+If these claims hold, then for $m_{X_1}$-a.e. $x = g\Gamma_1 \in X_1$, the pair $(g\Gamma_1, \phi(g\Gamma_1))$ must lie in the orbit $\ L \cdot (g_1\Gamma_1, g_2\Gamma_2)$. This implies $\phi(g\Gamma_1) = \varphi(g)h\Gamma_2$ (where $h = \varphi(g_1)^{-1}g_2$), proving Theorem 1. To prove that $\mu$ is indeed an orbit volume measure, it suffices to show that at least one $L$-orbit has positive $\mu$-measure, as the $\Delta(U)$-invariance of the orbit combined with the ergodicity of $\mu$ would then force $\mu$ to be supported on that orbit.
+
+> **Remark.** Let $X = G/\Gamma$ and $H < G$ be a unimodular closed subgroup. For $x_0 = g_0\Gamma \in X$, the orbit $H \cdot x_0 \cong H / (g_0\Gamma g_0^{-1} \cap H)$ as a homogenous space carries a unique $H$-invariant probability measure, referred to here as the **volume measure** on the orbit.
+
+
+Pick $(l_1, l_2) \in L$. By the $L$-invariance of $\mu$, we have $(l_1, l_2)_* \mu = \mu$, which by the definition of $\mu$ implies:
+$$ \phi(l_1 \cdot x) = l_2 \cdot \phi(x) \quad \text{for } m_{X_1}\text{-a.e. } x \in X_1. $$
+From this, we observe:
+1. If $l_1 = e$, then $l_2 = e$.
+2. If $l_2 = e$, then $l_1$ cannot act ergodically on $X_1$; otherwise, $\phi(l_1 \cdot x) = \phi(x)$ would imply $\phi$ is a constant map, which is a contradiction.
+
+By applying these observations, we use the following:
+
+> **Lemma 3.** Let $G$ be a group and $L$ be a subgroup of $G \times G$. If $\pi_1^{-1}(e_G) = \{e_G\}$, then there exists a group homomorphism $\psi : \pi_1(L) \to G$ such that $L = \text{Graph}(\psi)$.
+
+The problem finally reduces to proving that $\pi_1(L) = G = \text{SL}_3(\mathbb{R})$. If $\pi_1(L) = G$, then $\text{Graph}(\phi) \subseteq L \cdot (\Gamma_1, \phi(\Gamma_1))$, and thus $\mu(L \cdot (\Gamma_1, \phi(\Gamma_1))) = 1 > 0$, completing the argument.
+
+## 3. The Dynamical Argument
+
+We now begin to outline the proof. To make our life easier, let us assume that $\Gamma_i < G$ are cocompact lattices, meaning $X_i = G/\Gamma_i$ are compact spaces. 
+Let 
+$$U = \{u_t = \begin{pmatrix} 1 & t & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1 \end{pmatrix} : t \in \mathbb{R}\}$$ 
+be our one-parameter subgroup. Note that for any $s \in \mathbb{R}$, we have:
+$$ v_s = \begin{pmatrix} 1 & 0 & s \\ 0 & 1 & 0 \\ 0 & 0 & 1 \end{pmatrix} \in C_G(U) = \{g \in G : gu_t = u_tg, \forall t \in \mathbb{R}\}. $$
+
+By Lusin's Theorem, there exists a compact subset $K \subset X_1$ such that $m_{X_1}(K) > 0.99$ and the restriction $\phi|_K$ is uniformly continuous. Let 
+$$Y = \{x \in X_1 : \frac{1}{n} \int_0^n \chi_K(u_t \cdot x) \, dt > 0.9, \forall n \in \mathbb{N}\}.$$ 
+By the Maximal Ergodic Theorem, $m_{X_1}(Y) > 0.9$. (This is not immediately obvious, but it is a classic application of the theorem; readers seeing this for the first time are encouraged to try proving it). 
+
+Take $\epsilon > 0$ to be $1/10$ of the injectivity radius in $X_2$, meaning for any $x = g\Gamma_2 \in X_2$, the map 
+$$B_\epsilon^G(e) \ni h \mapsto hg\Gamma_2 \in B_\epsilon^X(x)$$ 
+is an isometry. Choose $\delta > 0$ such that for any $x_1, x_1' \in K$:
+$$ d_{X_1}(x_1, x_1') < \delta \implies d_{X_2}(\phi(x_1), \phi(x_1')) < \epsilon \quad (*) $$
+
+Let $s \in [-\delta, \delta]$. Since $m_{X_1}(Y \cap K) = m(v_s^{-1}(Y \cap K)) > 0.8$, and the measure-preserving system $X$ is ergodic, we can pick $x_1 \in (Y \cap K) \cap v_s^{-1}(Y \cap K)$ such that $(x_1, \phi(x_1)),
+(v_s \cdot x_1, \phi(v_s \cdot x_1)) \in \text{Graph}(\phi)$ are generic points for the system $X$. Let $x_1' = v_s \cdot x_1$.
+
+In $X_1$, since $v_s \in C_G(U)$, we have:
+$$ u_t \cdot x_1' = u_t \cdot (v_s \cdot x_1) = v_s \cdot (u_t \cdot x_1). $$
+This implies that the $u_t$-orbits of $x_1$ and $x_1'$ differ only by a fixed displacement $v_s$; intuitively, we can think of these two orbits as being "parallel" to each other.
+
+
+In $X_2$, let $g \in G$ be the element representing the initial displacement between $\phi(x_1)$ and $\phi(x_1')$, such that $\phi(x_1') = g \cdot \phi(x_1)$. Then, by the equivariance of the factor map, we have:
+$$ \phi(u_t \cdot x_1') = u_t \cdot \phi(x_1') = u_t g \cdot \phi(x_1) = (u_t g u_t^{-1}) \cdot \phi(u_t \cdot x_1) = \text{Ad}_{u_t}(g) \cdot \phi(u_t \cdot x_1). $$
+As mentioned earlier, $\text{Ad}_{u_t}(g)$ is a matrix-valued polynomial in $t$. A polynomial map must either be constant or diverge to infinity as $t \to \infty$.
+
+#### Case 1: $\text{Ad}_{u_t}(g)$ is constant.
+Since $\text{Ad}_{u_0}(g) = e$, we deduce that $\text{Ad}_{u_t}(g) = e$ for all $t$, which means $g \in C_G(U)$. Thus, $(v_s, g) \in C_{G \times G}(\Delta(U))$. From the following lemma, we can conclude that $(v_s, g) \in L$, implying $v_s \in \pi_1(L)$.
+
+> **Lemma 4.** Let $G$ be a connected Lie group, $\Gamma < G$ a lattice, and $U = \{u_t = \exp(tu) : t \in \mathbb{R}\}$ a one-parameter unipotent subgroup. Let $\mu$ be a $U$-invariant ergodic probability measure on $X = G/\Gamma$. If $x$ and $y = h \cdot x$ are two generic points for $(X, \mu, u_t)$ and $h \in C_G(U)$, then $h \in \text{Stab}_G(\mu)$.
+
+**Proof.** By the definition of generic points, we have:
+$$ \frac{1}{T} \int_0^T f(u_t \cdot y) \, dt \longrightarrow \int_X f \, d\mu, \quad \forall f \in C_c(X). $$
+On the other hand,
+$$ \frac{1}{T} \int_0^T f(u_t \cdot (h \cdot x)) \, dt = \frac{1}{T} \int_0^T f(h \cdot (u_t \cdot x)) \, dt = \frac{1}{T} \int_0^T (f \circ h)(u_t \cdot x) \, dt \longrightarrow \int_X (f \circ h) \, d\mu. $$
+Thus $\int f \, d\mu = \int f \circ h \, d\mu$ for all $f$, implying $h \in \text{Stab}_G(\mu)$. $\square$
+
+#### Case 2: $\text{Ad}_{u_t}(g)$ is not a constant polynomial.
+If it is not constant, then for sufficiently large $T$, the norm of $\text{Ad}_{u_t}(g)$ will be very large for most $t \in [0, T]$. Specifically, we have the following polynomial estimate:
+
+> **Lemma 5.** Let $p \in \mathbb{R}[t]$ be a polynomial of degree at most $d$. For a fixed $T > 0$ and any $\kappa > 0$, we have:
+> $$ \{t \in [0, T] : |p(t)| < \kappa \|p\|_{[0, T], \infty}\} \ll_d \kappa^{1/d} T, $$
+> where $\|p\|_{[0, T], \infty} = \sup_{t \in [0, T]} |p(t)|$.
+
+**Proof.** This can be shown using Lagrange interpolation.
+
+Let $T = \inf \{t > 0 : d_G(e, \text{Ad}_{u_t}(g)) = 10\epsilon\}$. By the definition of $\epsilon$, for $t \in [0, T]$, the distance in $X_2$ satisfies $d_{X_2}(\phi(u_t \cdot x_1), \phi(u_t \cdot x_1')) = d_G(e, \text{Ad}_{u_t}(g))$.
+
+By Lemma 5, the proportion of time $t \in [0, T]$ such that $d_G(e, \text{Ad}_{u_t}(g)) < \epsilon$ is at most $C_d (10\%)^{-1/d}$. Since $U = \{u_t\}$ is fixed, $d$ is also fixed. Thus, by choosing a smaller $\epsilon$, we can ensure that for at most 50% of the time $t \in [0, T]$, the distance $d_G(e, \text{Ad}_{u_t}(g))$ is less than $\epsilon$.
+
+However, we have an opposing estimate. For $T_n = n$, since $x_1, x_1' \in Y$, we know that for more than 90% of the time $t \in [0, T_n]$, we have $u_t \cdot x_1, u_t \cdot x_1' \in K$. By the definition of $s \in [-\delta, \delta]$ and property $(*)$, this implies that for more than 90% of the time $t \in [0, T_n]$, we must have:
+$$ d_{X_2}(\phi(u_t \cdot x_1), \phi(u_t \cdot x_1')) = d_G(e, \text{Ad}_{u_t}(g)) < \epsilon. $$
+This contradicts the polynomial divergence of Case 2. Thus, Case 1 must hold.
+
+In summary, there exists $\delta > 0$ such that for any $s \in [-\delta, \delta]$, we have $v_s \in \pi_1(L)$. Since $\pi_1(L)$ is a subgroup of $G$ and $v_{ns} = v_s^n$, we conclude that the entire one-parameter subgroup
+$$ \left\{ \begin{pmatrix} 1 & 0 & s \\ 0 & 1 & 0 \\ 0 & 0 & 1 \end{pmatrix} : s \in \mathbb{R} \right\} \subseteq \pi_1(L). $$
+
+Note that $v_s' = \begin{pmatrix} 1 & 0 & 0 \\ 0 & 1 & s \\ 0 & 0 & 1 \end{pmatrix}$ also belongs to $C_G(U)$. By an identical argument, we can show that
+$$ \left\{ \begin{pmatrix} 1 & 0 & 0 \\ 0 & 1 & s \\ 0 & 0 & 1 \end{pmatrix} : s \in \mathbb{R} \right\} \subseteq \pi_1(L). $$
+
+Combining these with the original unipotent subgroup $U$, the resulting subgroup generates the **Heisenberg group** $H$ within $G$. Specifically:
+$$ H = \left\{ \begin{pmatrix} 1 & x & z \\ 0 & 1 & y \\ 0 & 0 & 1 \end{pmatrix} : x, y, z \in \mathbb{R} \right\} \subseteq \pi_1(L). $$
+
+## 4. Algebraic Part: "Iteration" of the Dynamical Argument
+
+This concludes the dynamical systems portion of the proof. We have obtained two additional unipotent directions that preserve the measure $\mu$. To complete the remainder of the theorem, we need to examine the root system of the Lie algebra $\mathfrak{sl}_3(\mathbb{R})$. In fact, the case for $\text{SL}_3(\mathbb{R})$ is significantly simpler than $\text{SL}_2(\mathbb{R})$ precisely because the former's root system structure introduces commutativity between roots in different directions.
+
+In the final section of this post, I will provide an overview of how we "iterate" the previous argument to obtain invariance along more unipotenst directions.
+
+For $i, j$, let $U_{ij} = \{u_t^{ij} = I + tE_{ij} : t \in \mathbb{R}\}$. Note that $u_s^{21} \in C_G(U_{23})$. We hope to repeat the previous logic to conclude that $u_s^{21} \in \pi_1(L)$. Recall that $L = \text{Graph}(\varphi)$ and $U_{23} \subseteq \pi_1(L)$. After selecting appropriate $s, x_1, x_1' = u_s^{21} \cdot x_1$, we have, as before:
+$$ \phi(u_t^{23} \cdot (u_s^{21} \cdot x_1)) = \varphi(u_t^{23})g \cdot \phi(x_1) = \text{Ad}_{\varphi(u_t^{23})}(g) \cdot \phi(u_t^{23} \cdot x_1). $$
+
+However, our previous argument relied heavily on the polynomial structure of $\text{Ad}_{u_t}(g)$, which requires $u_t$ to be unipotent. To repeat the strategy here, we must prove that $\varphi(u_t^{23})$ is unipotent. In the dynamical argument above, we already established that
+$$ \varphi(u_t^{23}) \in C_G(U) = \left\{ \begin{pmatrix} a & x & z \\ 0 & a^{-2} & y \\ 0 & 0 & a \end{pmatrix} : x, y, z \in \mathbb{R}, a \neq 0 \right\}. $$
+
+We also know that $\varphi$ is defined on $H < G$. Furthermore, our previous observation tells us that $\varphi|_H$ is injective (since the Mautner phenomenon implies that the action of unipotent elements is ergodic). Since $\varphi|_U = \text{id}$, we have an injective group homomorphism 
+$$\tilde{\varphi} : H/U \to C_G(U)/U,\ hU \mapsto \varphi(h)U.$$ Because $H/U$ is a '2-dimensional' abelian group and it is the unique '2-dimensional' abelian subgroup in $C_G(U)/H$, it follows that $\varphi(H) \subseteq H$. Thus, $\varphi(u_t^{23})$ must be unipotent.
+
+## 5. Concluding Remarks
+
+There remain three subtle points to be addressed in a full treatment of the proof:
+
+1.  **Dropping the cocompactness assumption**: The assumption that $\Gamma$ is a cocompact lattice can be relaxed. By choosing a sufficiently large compact subset $K$, the argument remains essentially the same. The key tool here is the **non-divergence of unipotent flows** (a fundamental result by Margulis), which guarantees that for any $\epsilon > 0$, we can select a compact set such that the flow $u_t \cdot x$ spends more than $1-\epsilon$ of its time within it.
+2.  **Handling other one-parameter unipotent subgroups**: The treatment for other choices follow a nearly identical strategy to the one outlined above.
+3.  **Refining the Jordan block structure**: While we have proved that $\varphi(u_t^{23})$ is unipotent, it could theoretically take the form of a single large Jordan block. To resolve this technicality, one would perform yet another iteration of the same dynamical argument, which ultimately leads to a contradiction and confirms the algebraic structure of the map.
+</script>
+
+		<!-- 逻辑脚本：Markdown渲染 + 自动目录生成 -->
+		<script>
+			document.addEventListener("DOMContentLoaded", function() {
+				const markdownSource = document.getElementById('markdown-source').textContent;
+				const targetDiv = document.getElementById('markdown-target');
+				const tocList = document.getElementById('auto-toc');
+
+				// 1. 保护数学公式 (避免 Markdown 解析错误)
+				const mathStorage = [];
+				let protectedText = markdownSource.replace(/(\$\$[\s\S]*?\$\$)|(\$[^$\n]+?\$)/g, function(match) {
+					mathStorage.push(match);
+					return "MATHPLACEHOLDER" + (mathStorage.length - 1);
+				});
+
+				// 2. 渲染 Markdown
+				let htmlContent = marked.parse(protectedText);
+
+				// 3. 恢复数学公式
+				htmlContent = htmlContent.replace(/MATHPLACEHOLDER(\d+)/g, function(match, id) {
+					return mathStorage[parseInt(id)];
+				});
+				targetDiv.innerHTML = htmlContent;
+
+				// 4. KaTeX 渲染
+				renderMathInElement(targetDiv, {
+					delimiters: [
+						{left: '$$', right: '$$', display: true},
+						{left: '$', right: '$', display: false},
+						{left: '\\[', right: '\\]', display: true},
+						{left: '\\(', right: '\\)', display: false}
+					],
+					throwOnError: false
+				});
+
+				// 5. 【核心功能】自动生成目录
+				// 查找所有的 H2 和 H3 标签
+				const headers = targetDiv.querySelectorAll('h2, h3');
+				headers.forEach((header, index) => {
+					// 为每个标题生成一个唯一的 ID
+					const anchorId = 'section-' + index;
+					header.id = anchorId;
+
+					// 创建目录项
+					const li = document.createElement('li');
+					const a = document.createElement('a');
+					a.href = '#' + anchorId;
+					a.textContent = header.textContent;
+					
+					// 如果是 H3 (子标题)，添加特殊的缩进类
+					if (header.tagName === 'H3') {
+						a.classList.add('toc-sub');
+					}
+
+					li.appendChild(a);
+					tocList.appendChild(li);
+				});
+			});
+		</script>
+
+	</body>
+</html>
